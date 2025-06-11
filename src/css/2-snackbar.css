@@ -1,0 +1,66 @@
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+.form {
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.delay-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.delay-input {
+    max-width: 100%;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+    height: 40px;
+    padding: 0 16px;
+}
+
+.radio-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px 48px 8px;
+
+}
+
+.radio-knop {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #2e2f42;
+}
+
+button {
+    width: 360px;
+    margin-top: 8px;
+    cursor: pointer;
+
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 360px;
+    height: 40px;
+    background-color: #4e75ff;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
+
+button:hover,
+button:focus {
+    background-color: #6c8cff;
+}
