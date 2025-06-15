@@ -2,44 +2,41 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
-const submitData = {};
-const createSubmitData = e => {
+
+form.addEventListener('submit', e => {
     e.preventDefault();
-    const form = e.target.elements;
-    const delay = form.delay.value;
-    const state = form.state.value;
-    submitData.delay = +delay;
-    submitData.state = state;
 
-    e.target.reset();
+    const {
+        delay: { value: delayValue },
+        state: { value: stateValue },
+    } = e.target.elements;
 
-    const messageData = {
+    const delay = Number(delayValue);
+
+    form.reset();
+
+    const base = {
         position: 'topRight',
+        timeout: 5000,
+        progressBar: false,
+        close: true,
     };
 
-    const snackbar = new Promise((resolve, reject) => {
-        const { state, delay } = submitData;
+    new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (state === 'fulfilled') {
-                resolve(delay);
-                messageData.title = 'Succsess';
-                messageData.titleColor = 'green';
-                messageData.message = `✅ Fulfilled promise in ${delay}ms`;
-            } else {
-                reject(delay);
-                messageData.title = 'Error';
-                messageData.titleColor = 'red';
-                messageData.message = `❌ Rejected promise in ${delay}ms`;
-            }
+            stateValue === 'fulfilled' ? resolve(delay) : reject(delay);
         }, delay);
-    });
-
-    snackbar
-        .then(result => {
-            iziToast.show(messageData);
-        })
-        .catch(error => {
-            iziToast.show(messageData);
-        });
-};
-form.addEventListener('submit', createSubmitData);
+    })
+        .then(ms =>
+            iziToast.success({
+                ...base,
+                message: `✅ Fulfilled promise in ${ms}ms`,
+            })
+        )
+        .catch(ms =>
+            iziToast.error({
+                ...base,
+                message: `❌ Rejected promise in ${ms}ms`,
+            })
+        );
+});
